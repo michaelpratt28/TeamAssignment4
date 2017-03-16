@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>News Hub</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="stylesheets/styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="javascripts/newsapp.js"></script>
+</head>
+
+<body ng-app="NewsApp" ng-controller="NewsCtrl" ng-cloak>
+
+    <div class="top-pane">
+        <div class="source" ng-repeat="source in sources" back-img="images/{{source.imgUrl}}" ng-click="selectSource(source)"
+            ng-class="{'activeSource': source===activeSource}" title="{{source.name}}">
+        </div>
+    </div>
+    <div class="topStories">
+        <div class="article" ng-repeat="article in topStories" back-color="{{activeSource.primary}} {{activeSource.secondary}}">
+            <div class="article-img" back-img="{{article.urlToImage}}" ng-click="goTo(article.url)"></div>
+            <div class="words" ng-click="goTo(article.url)">
+                <span>{{article.title}}</span><br>
+                <span>{{article.description}}</span>
+            </div>
+            <div class="my-favorites">
+                <p class="favorite-btn" back-color="{{activeSource.secondary}} {{activeSource.primary}}" 
+                    ng-click="isFavorite(article.title) ? removeFromFavorites(article.title) : addToFavorites($index)">{{isFavorite(article.title) ? '-' : '+' }}</p>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+</body>
+
+</html>
